@@ -1,0 +1,261 @@
+
+POST {{$dotenv BASE_URL}}/chat/completions HTTP/1.1
+content-type: application/json
+authorization: Bearer {{$dotenv API_KEY}}
+
+{
+  "model": "{{$dotenv LARGE_MODEL_NAME}}",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You have two tools to complete the vacation booking end-to-end. Always use tools when available. First call GetEmployeeId to resolve the internal employeeId from a name or initials. After you receive the employeeId (it is always correct!), IMMIDIATELY MAKE A CALL TO EnterVacationPlan with the given dates. EnterVacationPlan is the correct mechanism to record vacations. Only when done, reply with a short confirmation in plain English. Make sure to call both functions in direct sequence until the vacation entry returns a successful confirmation."
+    },
+    {
+      "role": "user",
+      "content": "Please enter my vacation in the planning database, my initials are SG, and I want vacation from 2026-02-16 til 2026-02-20."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "GetEmployeeId",
+        "description": "Retrieve the internal employeeId for a person, given their full name or initials. Use this first whenever an employeeId is needed by other functions.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "employeeNameOrInitials": {
+              "type": "string",
+              "description": "Case-insensitive initials or full name to resolve to an internal employeeId (e.g., 'Sebastian Gingter' or 'SG')."
+            }
+          },
+          "required": ["employeeNameOrInitials"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "EnterVacationPlan",
+        "description": "Record a vacation (paid time off) entry in the planning database for the specified employeeId and date range (inclusive). This is the only mechanism needed to log vacation.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "employeeId": {
+              "type": "integer",
+              "description": "The internal numeric employeeId returned by GetEmployeeId."
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date of the vacation in ISO 8601 calendar date format YYYY-MM-DD. Range is inclusive; the time portion (if any) is ignored."
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date",
+              "description": "End date of the vacation in ISO 8601 calendar date format YYYY-MM-DD. Range is inclusive; the time portion (if any) is ignored."
+            }
+          },
+          "required": ["employeeId", "startDate", "endDate"]
+        }
+      }
+    }
+  ],
+  "tool_choice": "auto"
+}
+
+###
+
+POST {{$dotenv BASE_URL}}/chat/completions HTTP/1.1
+content-type: application/json
+authorization: Bearer {{$dotenv API_KEY}}
+
+{
+  "model": "{{$dotenv LARGE_MODEL_NAME}}",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You have two tools to complete the vacation booking end-to-end. Always use tools when available. First call GetEmployeeId to resolve the internal employeeId from a name or initials. After you receive the employeeId (it is always correct!), IMMIDIATELY MAKE A CALL TO EnterVacationPlan with the given dates. EnterVacationPlan is the correct mechanism to record vacations. Only when done, reply with a short confirmation in plain English. Make sure to call both functions in direct sequence until the vacation entry returns a successful confirmation."
+    },
+    {
+      "role": "user",
+      "content": "Please enter my vacation in the planning database, my initials are SG, and I want vacation from 2026-02-16 til 2026-02-20. These dates are absolutely correct."
+    },
+    {
+      "role": "assistant",
+      "content": "\nFirst we need to find your employee ID.",
+      "tool_calls": [
+        {
+            "id": "call_t99gwd6s",
+            "index": 0,
+            "type": "function",
+            "function": {
+              "name": "GetEmployeeId",
+              "arguments": "{\"employeeNameOrInitials\":\"SG\"}"
+            }
+          }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_t99gwd6s",
+      "content": "{\"employeeId\":42}"
+    },
+    {
+      "role": "assistant",
+      "content": "I have found your employee ID (42), I understood that your vacation start and end dates are correct and I will now immidiately call the EnterVacationPlan function to record your vacation in the planning database with your requested dates."
+    },
+    {
+      "role": "user",
+      "content": "Go ahead."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "GetEmployeeId",
+        "description": "Retrieve the internal employeeId for a person, given their full name or initials. Use this first whenever an employeeId is needed by other functions.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "employeeNameOrInitials": {
+              "type": "string",
+              "description": "Case-insensitive initials or full name to resolve to an internal employeeId (e.g., 'Sebastian Gingter' or 'SG')."
+            }
+          },
+          "required": ["employeeNameOrInitials"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "EnterVacationPlan",
+        "description": "Record a vacation (paid time off) entry in the planning database for the specified employeeId and date range (inclusive). This is the only mechanism needed to log vacation.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "employeeId": {
+              "type": "integer",
+              "description": "The internal numeric employeeId returned by GetEmployeeId."
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date of the vacation in ISO 8601 calendar date format YYYY-MM-DD. Range is inclusive; the time portion (if any) is ignored."
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date",
+              "description": "End date of the vacation in ISO 8601 calendar date format YYYY-MM-DD. Range is inclusive; the time portion (if any) is ignored."
+            }
+          },
+          "required": ["employeeId", "startDate", "endDate"]
+        }
+      }
+    }
+  ]
+}
+
+###
+
+POST {{$dotenv BASE_URL}}/chat/completions HTTP/1.1
+content-type: application/json
+authorization: Bearer {{$dotenv API_KEY}}
+
+{
+  "model": "{{$dotenv LARGE_MODEL_NAME}}",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You have two tools to complete the vacation booking end-to-end. Always use tools when available. First call GetEmployeeId to resolve the internal employeeId from a name or initials. After you receive the employeeId, immediately call EnterVacationPlan with the given dates. Do not ask for admin portals or external access; EnterVacationPlan is the correct mechanism to record vacations. When done, reply with a short confirmation in plain English."
+    },
+    {
+      "role": "user",
+      "content": "Please enter my vacation in the planning database, my initials are SG, and I want vacation from 2026-02-16 til 2026-02-20."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_get_emp_1",
+          "type": "function",
+          "function": {
+            "name": "GetEmployeeId",
+            "arguments": "{\"employeeNameOrInitials\":\"SG\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_get_emp_1",
+      "content": "{\"employeeId\":42}"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_book_vac_1",
+          "type": "function",
+          "function": {
+            "name": "EnterVacationPlan",
+            "arguments": "{\"employeeId\":42,\"startDate\":\"2026-02-16\",\"endDate\":\"2026-02-20\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_book_vac_1",
+      "content": "{\"success\":true}"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "GetEmployeeId",
+        "description": "Retrieve the internal employeeId for a person, given their full name or initials. Use this first whenever an employeeId is needed by other functions. If multiple matches are possible, prefer an exact initials match; if still ambiguous, ask the user to clarify.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "employeeNameOrInitials": {
+              "type": "string",
+              "description": "Case-insensitive initials or full name to resolve to an internal employeeId (e.g., 'Sebastian Gingter' or 'SG')."
+            }
+          },
+          "required": ["employeeNameOrInitials"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "EnterVacationPlan",
+        "description": "Record a vacation (paid time off) entry in the planning database for the specified employeeId and date range (inclusive). This is the only mechanism needed to log vacation—do not request admin portals or external systems. Call this immediately after you have the employeeId.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "employeeId": {
+              "type": "integer",
+              "description": "The internal numeric employeeId returned by GetEmployeeId."
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date of the vacation in ISO 8601 calendar date format YYYY-MM-DD. Range is inclusive; the time portion (if any) is ignored."
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date",
+              "description": "End date of the vacation in ISO 8601 calendar date format YYYY-MM-DD. Range is inclusive; the time portion (if any) is ignored."
+            }
+          },
+          "required": ["employeeId", "startDate", "endDate"]
+        }
+      }
+    }
+  ]
+}

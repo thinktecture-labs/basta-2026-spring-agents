@@ -1,0 +1,22 @@
+
+POST {{$dotenv BASE_URL}}/chat/completions HTTP/1.1
+content-type: application/json
+authorization: Bearer {{$dotenv API_KEY}}
+
+{
+  "model": "{{$dotenv SMALL_MODEL_NAME}}",
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the meaning of life?"
+    },
+    {
+      "role": "assistant",
+      "content": "The answer is 42."
+    },
+    {
+      "role": "user",
+      "content": "That is cool! But why did you answer that?"
+    }
+  ]
+}

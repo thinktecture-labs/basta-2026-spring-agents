@@ -1,0 +1,30 @@
+
+POST {{$dotenv BASE_URL}}/chat/completions HTTP/1.1
+content-type: application/json
+authorization: Bearer {{$dotenv API_KEY}}
+
+{
+  "model": "{{$dotenv SMALL_MODEL_NAME}}",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Only give me the actual answer, no explanation, no notes, no additional context: What is the meaning of life, the universe and everything?"
+    }
+  ]
+}
+
+### 
+
+POST {{$dotenv BASE_URL}}/chat/completions HTTP/1.1
+content-type: application/json
+authorization: Bearer {{$dotenv API_KEY}}
+
+{
+  "model": "{{$dotenv SMALL_MODEL_NAME}}",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Great, but why did you answer that?"
+    }
+  ]
+}

@@ -6,4 +6,14 @@ Nach Chatbots sind Agents und Multi-Agent-Systeme nun das nächste große Ding i
 
 ## Usage of the demos:
 
-Provide an [OpenRouter](https://openrouter.ai/) API Key in the `.env` file, then you can run the requests provided in the `.http` files.
+You can use any OpenAI API compatible LLM provider to run the demos.
+
+The `.env` file is prepared for usage with [Ollama](https://ollama.com/) (local models), and pre-configured to use the following models you can download with Ollama:
+
+```sh
+ollama pull mistral-small3.2:24b
+ollama pull mistral-large:latest
+ollama pull gpt-oss:20b
+```
+
+As an alternative, you can provide your own [OpenAI](https://platform.openai.com/) or [OpenRouter](https://openrouter.ai/) API Key in the `.env` file and use the models from there. Just add your API key and comment in the corresponding section.
