@@ -1,0 +1,17 @@
+﻿[
+  {
+    "employeeId": "E003",
+    "startDate": "2026-04-13",
+    "endDate": "2026-04-17"
+  },
+  {
+    "employeeId": "E005",
+    "startDate": "2026-08-03",
+    "endDate": "2026-08-07"
+  },
+  {
+    "employeeId": "E007",
+    "startDate": "2026-06-08",
+    "endDate": "2026-06-12"
+  }
+]

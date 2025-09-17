@@ -1,0 +1,10 @@
+.DS_Store
+
+bin/
+obj/
+
+state/
+
+BastaAgent/BastaAgent/log.txt
+
+BastaAgent/BastaAgent.Tests/TestResults/

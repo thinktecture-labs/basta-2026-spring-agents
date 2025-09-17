@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>BastaAgent</RootNamespace>
+    <UserSecretsId>3e702792-0d41-4fad-9c5b-60443bdee142</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- ASP.NET Core packages for configuration, DI, and logging -->
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageReference
+      Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
+      Version="9.0.9"
+    />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Copy configuration files to output directory -->
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Prompts\*.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,56 @@
+﻿[
+  {
+    "projectId": "P-1001",
+    "name": "Project Alpha",
+    "assignments": [
+      {
+        "employeeId": "E001",
+        "week": "2026-07-27"
+      },
+      {
+        "employeeId": "E001",
+        "week": "2026-08-03"
+      },
+      {
+        "employeeId": "E002",
+        "week": "2026-08-03"
+      },
+      {
+        "employeeId": "E004",
+        "week": "2026-08-03"
+      }
+    ]
+  },
+  {
+    "projectId": "P-1002",
+    "name": "Project Sigma",
+    "assignments": [
+      {
+        "employeeId": "E003",
+        "week": "2026-08-10"
+      },
+      {
+        "employeeId": "E006",
+        "week": "2026-08-10"
+      }
+    ]
+  },
+  {
+    "projectId": "P-1003",
+    "name": "Project Omega",
+    "assignments": [
+      {
+        "employeeId": "E008",
+        "week": "2026-08-03"
+      },
+      {
+        "employeeId": "E008",
+        "week": "2026-08-03"
+      },
+      {
+        "employeeId": "E007",
+        "week": "2026-08-10"
+      }
+    ]
+  }
+]

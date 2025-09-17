@@ -1,0 +1,11 @@
+[
+  { "id": "E001", "name": "Anna Weber",      "department": "Engineering" },
+  { "id": "E002", "name": "Jonas Keller",    "department": "Engineering" },
+  { "id": "E003", "name": "Mia Schröder",    "department": "Product" },
+  { "id": "E004", "name": "Lukas Braun",     "department": "Product" },
+  { "id": "E005", "name": "Lea Fischer",     "department": "Design" },
+  { "id": "E006", "name": "Noah Hartmann",   "department": "Design" },
+  { "id": "E007", "name": "Emma Vogt",       "department": "QA" },
+  { "id": "E008", "name": "Paul Schneider",  "department": "QA" }
+]
+

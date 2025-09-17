@@ -1,0 +1,18 @@
+# EditorConfig for BastaAgent.Tests
+
+root = true
+
+[*.cs]
+
+# xUnit1051: Calls to methods which accept CancellationToken should use TestContext.Current.CancellationToken
+# We're suppressing this because we handle cancellation appropriately in our tests
+dotnet_diagnostic.xUnit1051.severity = none
+
+# xUnit1026: Theory method should use all parameters
+dotnet_diagnostic.xUnit1026.severity = warning
+
+# CS0219: Variable assigned but never used
+dotnet_diagnostic.CS0219.severity = warning
+
+# CS1998: Async method lacks await
+dotnet_diagnostic.CS1998.severity = warning

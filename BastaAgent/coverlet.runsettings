@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <ExcludeByFile>**/BastaAgent/BastaAgent/Program.cs</ExcludeByFile>
+          <ExcludeByFile>**/BastaAgent/BastaAgent/UI/InteractiveConsole.cs</ExcludeByFile>
+          <ExcludeByFile>**/BastaAgent/BastaAgent/Utilities/ProgressIndicator.cs</ExcludeByFile>
+          <ExcludeByAttribute>
+            System.Runtime.CompilerServices.CompilerGeneratedAttribute;
+            System.Diagnostics.DebuggerNonUserCodeAttribute;
+            System.CodeDom.Compiler.GeneratedCodeAttribute;
+            System.Diagnostics.DebuggerHiddenAttribute
+          </ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
